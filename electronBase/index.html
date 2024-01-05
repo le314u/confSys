@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Instalador</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>  <title>Document</title>
+    <style>
+        .card{
+            display: inline-flex;
+        }
+        form{
+            width: 100%; 
+            max-width:1028px;
+            padding: 15px;
+            margin: auto;
+        }
+    </style>
+    
+</head>
+
+<body class="text-center">
+    
+    <h1 id="output"> Output </h1>
+
+</body>
+
+  <script>
+
+
+    function criarCard(titulo, explicacao, scriptValue) {
+        // Criar elementos HTML
+        var divCard = document.createElement('div');
+        divCard.className = 'card';
+        divCard.style.width = '18rem';
+
+        var divCardBody = document.createElement('div');
+        divCardBody.className = 'card-body';
+
+        var tituloElement = document.createElement('h5');
+        tituloElement.className = 'card-title';
+        tituloElement.textContent = titulo;
+
+        var explicacaoElement = document.createElement('p');
+        explicacaoElement.className = 'card-text';
+        explicacaoElement.textContent = explicacao;
+
+        var buttonElement = document.createElement('button');
+        buttonElement.type = 'submit';
+        buttonElement.name = 'arg';
+        buttonElement.value = scriptValue;
+        buttonElement.className = 'btn btn-primary';
+        buttonElement.textContent = 'Instalar';
+        buttonElement.onclick =  () => {
+            window.ipcRenderer.send('execute-script', scriptValue);
+        }
+
+        // Anexar elementos HTML
+        divCardBody.appendChild(tituloElement);
+        divCardBody.appendChild(explicacaoElement);
+        divCardBody.appendChild(buttonElement);
+        divCard.appendChild(divCardBody);
+
+        // Adicionar o card à página
+        document.body.appendChild(divCard);
+      }
+
+  </script>
+
+  <script>
+    criarCard("1Bash","Configuração pelo bash","bash")
+    criarCard("2Bash","Configuração pelo bash","bash")
+    criarCard("3Bash","Configuração pelo bash","bash")
+    criarCard("4Bash","Configuração pelo bash","bash")
+    criarCard("5Bash","Configuração pelo bash","bash")
+
+    window.ipcRenderer.receive('output', (message) => {
+        document.getElementById('output').innerText = 
+        console.log(message)
+
+    });
+
+    window.ipcRenderer.receive('create', (message) => {
+        console.log(message)
+        criarCard("1Bash","Configuração pelo bash","bash")
+        criarCard(message.getName(),message.getAbout(),message.getPath())
+    });
+
+  </script>
+</html>

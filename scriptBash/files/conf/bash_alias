@@ -1,0 +1,12 @@
+##Alias
+alias ls='ls --color=auto'
+alias ll='ls -alF'
+alias la='ls -A'
+alias l='ls -CF'
+alias grep='grep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias egrep='egrep --color=auto'
+alias mp3="youtube-dl --extract-audio --audio-format mp3"
+alias ping?="ping -c 3 www.google.com |grep -o [0-9]*\\.[0-9]\ ms"
+alias desligar="shutdown - h now"
+alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'

@@ -1,0 +1,12 @@
+# Video
+xrandr --newmode "2560x1080"  188.75  2560 2712 2976 3392  1080 1083 1093 1114 -hsync +vsync
+xrandr --addmode HDMI-1 2560x1080
+xrandr -s 2560x1080
+#Efeitos
+xcompmgr -scfFr 10 -D 5 -o 0.3 &
+#Painel
+tint2 &
+#Audio Control
+volumeicon
+#Background
+nitrogen --restore
