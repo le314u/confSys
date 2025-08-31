@@ -1,0 +1,71 @@
+{
+    "layer": "top", // Waybar at top layer
+    "modules-left": ["custom/name", "sway/workspaces"],
+    "modules-right": ["cpu", "memory", "network", "pulseaudio", "battery", "tray", "clock"],
+    "tray": {
+        // "icon-size": 21,
+        "spacing": 10
+    },
+    "clock": {
+        "interval": 60,
+        "format": "{:%H:%M}",
+        "max-length": 25
+    },
+    "cpu": {
+        "format": "cpu {usage}%"
+    },
+    "memory": {
+        "format": "mem {}%"
+    },
+    // "backlight": {
+    //     "device": "intel_backlight",
+    //     "format": "{percent}%",
+    //     "format-icons": ["O", "X"]
+    // },
+    "battery": {
+        //"states": {
+        //    // "good": 95,
+        //    "warning": 30,
+        //    "critical": 15
+        //},
+        "format": "{capacity}{icon}%",
+        "format-charging": "{capacity}%",
+        "format-discharging": "{capacity}% -",
+        "format-full": "100%",
+        "interval":5
+        // "format-good": "", // An empty format will hide the module
+        // "format-full": "",
+        //"format-icons": ["", "", "", "", ""]
+    },
+    "network": {
+        // "interface": "wlp2s0", // (Optional) To force the use of this interface
+        // "format-wifi": "wifi {signalStrength}%",
+        "tooltip-format":"nmcli",
+        "format-ethernet": "{ifname}: {ipaddr}/{cidr} ethernet",
+        "format-disconnected": "⚠",
+        "interval":5
+
+    },
+    "pulseaudio": {
+        //"scroll-step": 1,
+        "format": "vol {volume}%",
+        "format-bluetooth": "{volume}% {icon}",
+        "format-muted": "",
+        "format-icons": {
+            "headphones": "",
+            "handsfree": "",
+            "headset": "",
+            "phone": "",
+            "portable": "",
+            "car": "",
+            "default": ["", ""]
+        },
+        "on-click": "pavucontrol"
+    },
+    "custom/name":{
+        "format": "{text}",
+        "exec":"whoami",
+        "intervalo": 60,
+        "on-click":"chromium https://314-u.com"
+    }
+}
